@@ -10,6 +10,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -17,7 +19,9 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    TodoListComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
