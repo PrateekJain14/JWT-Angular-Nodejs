@@ -1,6 +1,9 @@
 const _ = require('lodash');
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
 
 var TODOS = [
     { 'id': 1, 'user_id': 1, 'name': "Get Milk", 'completed': false },
@@ -13,6 +16,8 @@ var USERS = [
     { 'id': 2, 'username': 'paul' },
     { 'id': 3, 'username': 'sebastian' },
 ];
+
+app.use(bodyParser.json());
 
 function getTodos(userID) {
     var todos = _.filter(TODOS, ['user_id', userID]);
@@ -28,6 +33,15 @@ function getUsers() {
     return USERS;
 }
 
+app.post('/api/auth', function(req,res){
+    const body = req.body;
+
+    const user = USERS.find(user => user.username == body.username);
+    if(!user || body.password != 'todo') return res.sendStatus(401);
+    
+    var token = jwt.sign({userID: user.id}, 'todo-app-super-shared-secret', {expiresIn: '1h'});
+    res.send({token});
+});
 app.get('/', function (req, res) {
     res.send('Angular JWT Todo API Server')
 });
