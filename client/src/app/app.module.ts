@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from './auth.service';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -33,6 +35,8 @@ export function tokenGetter() {
   providers: [
     TodoService,
     UserService,
+    AuthGuard,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
