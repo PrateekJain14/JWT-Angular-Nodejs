@@ -43,7 +43,7 @@ app.get('/', function (req, res) {
 });
 app.get('/api/todos', function (req, res) {
     res.type("json");
-    res.send(getTodos(getTodos(req.user.userID)));
+    res.send(getTodos(req.user.userID));
 });
 
 app.get('/api/users', function (req, res) {
