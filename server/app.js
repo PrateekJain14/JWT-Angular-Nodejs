@@ -36,7 +36,7 @@ function getUsers() {
 
 app.post('/api/auth', function(req,res){
     const body = req.body;
-
+    console.log("=========")
     const user = USERS.find(user => user.username == body.username);
     if(!user || body.password != 'password') return res.sendStatus(401);
     
