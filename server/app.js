@@ -25,18 +25,13 @@ function getTodos(userID) {
 
     return todos;
 }
-function getTodo(todoID) {
-    var todo = _.find(TODOS, function (todo) { return todo.id == todoID; })
 
-    return todo;
-}
 function getUsers() {
     return USERS;
 }
 
 app.post('/api/auth', function(req,res){
     const body = req.body;
-    console.log("=========")
     const user = USERS.find(user => user.username == body.username);
     if(!user || body.password != 'password') return res.sendStatus(401);
     
@@ -48,7 +43,7 @@ app.get('/', function (req, res) {
 });
 app.get('/api/todos', function (req, res) {
     res.type("json");
-    res.send(getTodos('1'));
+    res.send(getTodos(getTodos(req.user.userID)));
 });
 
 app.get('/api/users', function (req, res) {
