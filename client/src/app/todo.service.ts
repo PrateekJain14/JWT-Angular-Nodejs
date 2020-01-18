@@ -12,7 +12,4 @@ export class TodoService {
     return this.http.get<Todo[]>('/api/todos');
   }
 
-  getTodo(id: number) {
-    return this.http.get<Todo>(`/api/todos/${id}`);
-  }
 }
